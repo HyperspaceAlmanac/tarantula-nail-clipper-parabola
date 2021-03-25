@@ -52,6 +52,34 @@ function palindrome(original) {
 
     return true;
 }
+function digitsSquareSum(number) {
+    let result = 0;
+    let lastDigit = 0;
+    while (number > 0) {
+        lastDigit = number % 10;
+        result += lastDigit * lastDigit;
+        number = Math.floor(number / 10);
+    }
+    return result;
+}
+function happyNumbers(number) {
+    if (number == 1) {
+        return true;
+    }
+    let numSet = new Set();
+    numSet.add(number);
+    let nextNum = number;
+    while (true) {
+        nextNum = digitsSquareSum(nextNum);
+        if (nextNum == 1) {
+            return true;
+        } else if (numSet.has(nextNum)) {
+            return false;
+        } else {
+            numSet.add(nextNum);
+        }
+    }
+}
 
 function runCode() {
     let input = readInput("Please enter a string to capitalize");
@@ -60,16 +88,25 @@ function runCode() {
     //let output = reverseString(input);
     //let output = capitalize(input);
     //let output = compressString(input);
+    input = parseInt(input);
+    if (isNaN(input)) {
+        document.getElementById("outputValues").innerHTML = "Invalid input. Not a number";
+    } else {
+        let output = happyNumbers(input);
+        document.getElementById("outputValues").innerHTML = output;
+    }
     //document.getElementById("outputValues").innerHTML = output;
 
     let boolResult = palindrome(input);
-    if (boolResult) {
-        document.getElementById("outputValues").innerHTML = "True Value";
-    } else {
-        document.getElementById("outputValues").innerHTML = "False Value";
-    }
+    //if (boolResult) {
+    //    document.getElementById("outputValues").innerHTML = "True Value";
+    //} else {
+    //    document.getElementById("outputValues").innerHTML = "False Value";
+    //}
 }
 
 function readInput(promptMessage) {
     return prompt(promptMessage);
 }
+
+runCode();
