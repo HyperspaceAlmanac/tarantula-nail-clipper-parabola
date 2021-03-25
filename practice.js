@@ -107,6 +107,21 @@ function hundredPrimes() {
 
 }
 
+function fibonacci(start, number) {
+    let result = [start];
+    if (number <= 1) {
+        return result;
+    }
+    result.push(start);
+    if (number == 2) {
+        return result;
+    }
+    for (let i = 0; i < number - 2; i++) {
+        result.push(result[result.length - 1] + result[result.length - 2])
+    }
+    return result;
+}
+
 function runCode() {
     //let input = readInput("Please enter a string to capitalize");
     //document.getElementById("inputValues").innerHTML = input;
@@ -129,9 +144,18 @@ function runCode() {
     //} else {
     //    document.getElementById("outputValues").innerHTML = "False Value";
     //}
-    let output = hundredPrimes();
-    document.getElementById("inputValues").innerHTML = "First hundred primes";
-    document.getElementById("outputValues").innerHTML = printList(output);
+    //let output = hundredPrimes();
+    //document.getElementById("inputValues").innerHTML = "First hundred primes";
+    //document.getElementById("outputValues").innerHTML = printList(output);
+    let startNum = readInput("Please enter a starting number");
+    startNum = parseInt(startNum);
+    let numEntries = readInput("Please enter how many numbers in sequence");
+    numEntries = parseInt(numEntries);
+    
+    document.getElementById("inputValues").innerHTML = "Fibonacci sequence starting at " + startNum + ", with " + numEntries + " entries"; 
+
+    let output = fibonacci(startNum, numEntries);
+    document.getElementById("outputValues").innerHTML = output;
 }
 
 function readInput(promptMessage) {
