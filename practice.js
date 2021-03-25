@@ -80,29 +80,58 @@ function happyNumbers(number) {
         }
     }
 }
+function printList(numArray) {
+    let result = "[";
+    for (let i = 0; i < numArray.length; i++) {
+        if (numArray[i]) {
+            result += (result == "[" ? "" : ", ") + (i + 1);
+        }
+    }
+    return result + "]";
+}
+
+function hundredPrimes() {
+    let firstHundred = [];
+    for (let i = 0; i < 100; i++) {
+        firstHundred.push(true);
+    }
+    firstHundred[0] = false;
+    for (let i = 2; i <= firstHundred.length; i ++) {
+        if (firstHundred[i - 1]) {
+            for (let j = 1; i + i * j <= firstHundred.length; j++) {
+                firstHundred[i + i * j - 1] = false;
+            }
+        }
+    } 
+    return firstHundred;
+
+}
 
 function runCode() {
-    let input = readInput("Please enter a string to capitalize");
-    document.getElementById("inputValues").innerHTML = input;
+    //let input = readInput("Please enter a string to capitalize");
+    //document.getElementById("inputValues").innerHTML = input;
     // Code here
     //let output = reverseString(input);
     //let output = capitalize(input);
     //let output = compressString(input);
-    input = parseInt(input);
-    if (isNaN(input)) {
-        document.getElementById("outputValues").innerHTML = "Invalid input. Not a number";
-    } else {
-        let output = happyNumbers(input);
-        document.getElementById("outputValues").innerHTML = output;
-    }
+    //input = parseInt(input);
+    //if (isNaN(input)) {
+    //    document.getElementById("outputValues").innerHTML = "Invalid input. Not a number";
+    //} else {
+    //    let output = happyNumbers(input);
+    //    document.getElementById("outputValues").innerHTML = output;
+    //}
     //document.getElementById("outputValues").innerHTML = output;
 
-    let boolResult = palindrome(input);
+    //let boolResult = palindrome(input);
     //if (boolResult) {
     //    document.getElementById("outputValues").innerHTML = "True Value";
     //} else {
     //    document.getElementById("outputValues").innerHTML = "False Value";
     //}
+    let output = hundredPrimes();
+    document.getElementById("inputValues").innerHTML = "First hundred primes";
+    document.getElementById("outputValues").innerHTML = printList(output);
 }
 
 function readInput(promptMessage) {
